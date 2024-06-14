@@ -5,6 +5,7 @@ export default {
     extend: {
       colors: {
         purpleDark: "#9D71FD",
+        ink: "#5F517D",
       },
     },
   },
