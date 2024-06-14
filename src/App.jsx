@@ -56,15 +56,18 @@ function App() {
             ))}
           </div>
           <div className="">
-            <div className="w-[120px] flex">
-              <div className="w-[60px] h-[80px] mt-10 border-t-2 border-r border-gray rounded-se-3xl"></div>
-              <div className="w-[60px] h-[80px] mt-16 border-gray border-b-2 border-l rounded-bl-3xl"></div>
+            <div className="w-[120px] flex relative">
+              <div className="w-[3px] h-[2px] bg-gray-200 mt-[40px]"></div>
+              <div className="w-[60px] h-[50px] mt-10 border-t-2 border-r-2 border-gray rounded-se-3xl absolute top-0 left-[3px]"></div>
+              <div className="w-[60px] h-[50px] "></div>
+              <div className="w-[60px] h-[50px] mt-[90px] border-gray border-b-2 border-l-2 rounded-bl-3xl "></div>
             </div>
             <div className="w-[120px] border-2 border-gray"></div>
-            <div className="w-[120px] flex">
-              <div className="w-[60px] h-[80px] border-b-2 border-r border-black rounded-br-3xl mt-6"></div>
-              <div className="w-[60px] h-[80px] border-t-2 border-l border-black rounded-tl-3xl"></div>
+            <div className="w-[120px] flex absolute">
+              <div className="w-[60px] h-[50px] border-b-2 border-r-2 relative left-[2px] top-[0px] border-black rounded-br-3xl mt-[50px]"></div>
+              <div className="w-[60px] h-[50px] border-t-2 border-l-2 border-black rounded-tl-3xl"></div>
             </div>
+            <div className="w-[2px] h-[2px] bg-black mt-[98px]"></div>
           </div>
           <div className="w-[380px] border-2 rounded-3xl p-10 relative">
             <img
@@ -83,7 +86,20 @@ function App() {
               to lower PTO liability.”
             </p>
           </div>
-          <div className="w-[120px] bg-red-300"></div>
+          <div className="w-[120px] ">
+            <div className="flex relative">
+              <div className="w-[60px] h-[50px] mt-[90px] border-b-2 border-r-2 border-gray rounded-ee-3xl"></div>
+              <div className="w-[60px] h-[50px] mt-[40px] border-t-2 border-gray border-l-2 rounded-ss-3xl absolute top-0 right-[2px]"></div>
+              <div className="w-[2px] h-[2px] bg-gray-200 ml-[58px] mt-[40px]"></div>
+            </div>
+            <div className="w-[120px] border-2 bg-gray"></div>
+            <div className="flex relative">
+              <div className="w-[60px] h-[50px] border-t-2 border-r-2 rounded-se-3xl border-gray"></div>
+              <div className="w-[60px] h-[50px] mt-[50px] border-b-2 border-l-2 rounded-es-3xl absolute top-0 right-[2px]"></div>
+              <div className="w-[2px] h-[2px] bg-gray-200 ml-[58px] mt-[98px]"></div>
+            </div>
+          </div>
+
           <div className="">
             {data.boxesDataRight.map((info, index) => (
               <div
