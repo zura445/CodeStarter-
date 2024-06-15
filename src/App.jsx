@@ -37,8 +37,8 @@ function App() {
 
   return (
     <>
-      <div className="w-[1180px]">
-        <h1 className="font-bold text-[64px] text-center">
+      <div className="max-w-[1180px]">
+        <h1 className="font-bold md:text-[64px] text-[40px] text-center">
           Easy Turn-Key Integration
         </h1>
         <p className="max-w-[779px] text-center mt-6 text-lg m-auto">
@@ -62,8 +62,8 @@ function App() {
             </button>
           ))}
         </div>
-        <div className="mt-[69px] flex justify-center">
-          <div className="">
+        <div className="mt-[69px] flex justify-center ">
+          <div className="lg:block hidden">
             {data.boxesDataLeft.map((info, index) => (
               <div
                 className={`flex justify-between border w-[280px] p-4 rounded-xl items-center ${
@@ -99,7 +99,7 @@ function App() {
               </div>
             ))}
           </div>
-          <div className="">
+          <div className="lg:block hidden">
             <div className="w-[120px] flex relative">
               <div
                 className={`w-[3px] h-[2px] mt-[40px]  ${getBgClass(0)}`}
@@ -131,96 +131,100 @@ function App() {
             </div>
             <div className={`w-[2px] h-[2px] mt-[98px] ${getBgClass(2)}`}></div>
           </div>
-          <div className="w-[380px] border-2 rounded-3xl p-10 relative">
-            <img
-              className="w-[86px] h-[86px] rounded-[10px] absolute -top-[48px] left-36"
-              src="/images/woman.jpg"
-              alt="woman"
-            />
-            <h2 className="text-center mt-[30px] text-lg font-bold">
-              Lauren Robson
-            </h2>
-            <p className="text-sm text-ink text-center mt-[6px] leading-6">
-              HR Director
-            </p>
-            <p className="text-center mt-5">
-              “I want to lower PTO liability and keep my employess happy. I want
-              to lower PTO liability.”
-            </p>
-          </div>
-          <div className="w-[120px] ">
-            <div className="flex relative">
-              <div
-                className={`w-[60px] h-[50px] mt-[90px] border-b-2 border-r-2 rounded-ee-3xl ${getLineClassRight(
-                  0
-                )}`}
-              ></div>
-              <div
-                className={`w-[60px] h-[50px] mt-[40px] border-t-2 border-l-2 rounded-ss-3xl absolute top-0 right-[2px] ${getLineClassRight(
-                  0
-                )}`}
-              ></div>
-              <div
-                className={`w-[2px] h-[2px] ml-[58px] mt-[40px] ${getBgClassRight(
-                  0
-                )}`}
-              ></div>
+          <div className="md:flex  block">
+            <div className="w-[380px] border-2 rounded-3xl p-10 relative">
+              <img
+                className="w-[86px] h-[86px] rounded-[10px] absolute -top-[48px] left-36"
+                src="/images/woman.jpg"
+                alt="woman"
+              />
+              <h2 className="text-center mt-[30px] text-lg font-bold">
+                Lauren Robson
+              </h2>
+              <p className="text-sm text-ink text-center mt-[6px] leading-6">
+                HR Director
+              </p>
+              <p className="text-center mt-5">
+                “I want to lower PTO liability and keep my employess happy. I
+                want to lower PTO liability.”
+              </p>
             </div>
-            <div className={`w-[120px] border ${getLineClassRight(1)}`}></div>
-            <div className="flex relative">
-              <div
-                className={`w-[60px] h-[50px] border-t-2 border-r-2 rounded-se-3xl ${getLineClassRight(
-                  2
-                )}`}
-              ></div>
-              <div
-                className={`w-[60px] h-[50px] mt-[50px] border-b-2 border-l-2 rounded-es-3xl absolute top-0 right-[2px] ${getLineClassRight(
-                  2
-                )}`}
-              ></div>
-              <div
-                className={`w-[2px] h-[2px] ml-[58px] mt-[98px] ${getBgClassRight(
-                  2
-                )}`}
-              ></div>
-            </div>
-          </div>
-
-          <div className="">
-            {data.boxesDataRight.map((info, index) => (
-              <div
-                className={`flex justify-between border w-[280px] p-4 rounded-xl items-center ${
-                  index === 0 ? "" : "mt-[20px]"
-                } ${
-                  checkedItems.right[index] === true
-                    ? "border-black"
-                    : "border-gray"
-                }`}
-                key={index}
-              >
-                <div className="flex">
-                  <img
-                    className="w-12 h-12"
-                    src={info.imgSrc}
-                    alt={info.imgAlt}
-                  />
-                  <div className="ml-2">
-                    <p className="text-sm text-ink  leading-6">{info.title}</p>
-                    <p className="text-sm text-ink text-center leading-6">
-                      {info.description}
-                    </p>
-                  </div>
-                </div>
-                <label>
-                  <input
-                    type="checkbox"
-                    checked={checkedItems.right[index] || false}
-                    onChange={() => handleCheckboxChange("right", index)}
-                    className="w-4 h-4"
-                  />
-                </label>
+            <div className="w-[120px] lg:block hidden">
+              <div className="flex relative">
+                <div
+                  className={`w-[60px] h-[50px] mt-[90px] border-b-2 border-r-2 rounded-ee-3xl ${getLineClassRight(
+                    0
+                  )}`}
+                ></div>
+                <div
+                  className={`w-[60px] h-[50px] mt-[40px] border-t-2 border-l-2 rounded-ss-3xl absolute top-0 right-[2px] ${getLineClassRight(
+                    0
+                  )}`}
+                ></div>
+                <div
+                  className={`w-[2px] h-[2px] ml-[58px] mt-[40px] ${getBgClassRight(
+                    0
+                  )}`}
+                ></div>
               </div>
-            ))}
+              <div className={`w-[120px] border ${getLineClassRight(1)}`}></div>
+              <div className="flex relative">
+                <div
+                  className={`w-[60px] h-[50px] border-t-2 border-r-2 rounded-se-3xl ${getLineClassRight(
+                    2
+                  )}`}
+                ></div>
+                <div
+                  className={`w-[60px] h-[50px] mt-[50px] border-b-2 border-l-2 rounded-es-3xl absolute top-0 right-[2px] ${getLineClassRight(
+                    2
+                  )}`}
+                ></div>
+                <div
+                  className={`w-[2px] h-[2px] ml-[58px] mt-[98px] ${getBgClassRight(
+                    2
+                  )}`}
+                ></div>
+              </div>
+            </div>
+
+            <div className="mt-10 md:mt-0">
+              {data.boxesDataRight.map((info, index) => (
+                <div
+                  className={`flex justify-between border w-[280px] p-4 rounded-xl items-center ${
+                    index === 0 ? "" : "mt-[20px]"
+                  } ${
+                    checkedItems.right[index] === true
+                      ? "border-black"
+                      : "border-gray"
+                  }`}
+                  key={index}
+                >
+                  <div className="flex">
+                    <img
+                      className="w-12 h-12"
+                      src={info.imgSrc}
+                      alt={info.imgAlt}
+                    />
+                    <div className="ml-2">
+                      <p className="text-sm text-ink  leading-6">
+                        {info.title}
+                      </p>
+                      <p className="text-sm text-ink text-center leading-6">
+                        {info.description}
+                      </p>
+                    </div>
+                  </div>
+                  <label>
+                    <input
+                      type="checkbox"
+                      checked={checkedItems.right[index] || false}
+                      onChange={() => handleCheckboxChange("right", index)}
+                      className="w-4 h-4"
+                    />
+                  </label>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
