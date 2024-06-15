@@ -6,6 +6,7 @@ export default {
       colors: {
         purpleDark: "#9D71FD",
         ink: "#5F517D",
+        lightGray: "#F2EFFE",
       },
     },
   },

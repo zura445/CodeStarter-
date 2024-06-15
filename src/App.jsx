@@ -37,20 +37,20 @@ function App() {
 
   return (
     <>
-      <div className="max-w-[1180px]">
+      <div className="max-w-[1180px] p-6 lg:p-0">
         <h1 className="font-bold md:text-[64px] text-[40px] text-center">
           Easy Turn-Key Integration
         </h1>
-        <p className="max-w-[779px] text-center mt-6 text-lg m-auto">
+        <p className="md:max-w-[779px] w-full text-center mt-6 text-lg m-auto">
           Increase job satisfaction, improve engagement, decrease burnout and
           lower payroll liability by reimagining what employees can do with
           their PTO.
         </p>
-        <div className="flex justify-center mt-[50px]">
+        <div className="flex justify-center mt-[50px] overflow-x-auto scrollbar-hide">
           {buttonsText.map((btn, index) => (
             <button
               key={index}
-              className={`px-[18px] h-[38px] font-bold text-xs flex items-center border-2 focus:outline-none ml-2 box-border
+              className={`px-[18px] h-[38px] font-bold text-xs flex items-center border-2 focus:outline-none ml-2 box-border flex-shrink-0
       ${
         selectedButton === index
           ? "bg-purpleDark hover:bg-blue-500 text-white"
@@ -131,13 +131,15 @@ function App() {
             </div>
             <div className={`w-[2px] h-[2px] mt-[98px] ${getBgClass(2)}`}></div>
           </div>
-          <div className="md:flex  block">
-            <div className="w-[380px] border-2 rounded-3xl p-10 relative">
-              <img
-                className="w-[86px] h-[86px] rounded-[10px] absolute -top-[48px] left-36"
-                src="/images/woman.jpg"
-                alt="woman"
-              />
+          <div className="lg:flex  block">
+            <div className="lg:w-[380px] w-full border-2 rounded-3xl p-10 relative bg-lightGray">
+              <div className="absolute -top-[34px] left-1/2 transform -translate-x-1/2">
+                <img
+                  className="w-[86px] h-[86px] rounded-[10px]"
+                  src="/images/woman.jpg"
+                  alt="woman"
+                />
+              </div>
               <h2 className="text-center mt-[30px] text-lg font-bold">
                 Lauren Robson
               </h2>
@@ -145,8 +147,8 @@ function App() {
                 HR Director
               </p>
               <p className="text-center mt-5">
-                “I want to lower PTO liability and keep my employess happy. I
-                want to lower PTO liability.”
+                "I want to lower PTO liability and keep my employess happy. I
+                want to lower PTO liability."
               </p>
             </div>
             <div className="w-[120px] lg:block hidden">
@@ -187,10 +189,10 @@ function App() {
               </div>
             </div>
 
-            <div className="mt-10 md:mt-0">
+            <div className="mt-10 lg:mt-0">
               {data.boxesDataRight.map((info, index) => (
                 <div
-                  className={`flex justify-between border w-[280px] p-4 rounded-xl items-center ${
+                  className={`flex justify-between border lg:w-[280px] w-full p-4 rounded-xl items-center ${
                     index === 0 ? "" : "mt-[20px]"
                   } ${
                     checkedItems.right[index] === true
