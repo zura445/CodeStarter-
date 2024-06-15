@@ -1,9 +1,39 @@
 import { useState } from "react";
 import data from "./data.json";
 function App() {
-  const [count, setCount] = useState(0);
+  const [checkedItems, setCheckedItems] = useState({
+    left: {},
+    right: {},
+  });
+  const handleCheckboxChange = (side, index) => {
+    setCheckedItems((prevState) => ({
+      ...prevState,
+      [side]: {
+        ...prevState[side],
+        [index]: !prevState[side][index],
+      },
+    }));
+  };
+
+  const getLineClassLeft = (index) => {
+    return checkedItems.left[index] ? "border-black" : "border-gray";
+  };
+
+  const getBgClass = (index) => {
+    return checkedItems.left[index] ? "bg-black" : "bg-gray-200";
+  };
+
+  const getLineClassRight = (index) => {
+    return checkedItems.right[index] ? "border-black" : "border-gray";
+  };
+
+  const getBgClassRight = (index) => {
+    return checkedItems.right[index] ? "bg-black" : "bg-gray-200";
+  };
 
   const buttonsText = ["Small Business", "Medium Business", "Enterprise"];
+
+  const [selectedButton, setSelectedButton] = useState(null);
 
   return (
     <>
@@ -20,7 +50,13 @@ function App() {
           {buttonsText.map((btn, index) => (
             <button
               key={index}
-              className="bg-purpleDark px-[18px] h-[38px] text-white font-bold text-xs flex items-center border border-white focus:outline-none focus:border-none"
+              className={`px-[18px] h-[38px] font-bold text-xs flex items-center border-2 focus:outline-none ml-2 box-border
+      ${
+        selectedButton === index
+          ? "bg-purpleDark hover:bg-blue-500 text-white"
+          : "bg-white hover:text-blue-500 text-black border-purpleDark hover:border-blue-500 border-transparent"
+      }`}
+              onClick={() => setSelectedButton(index)}
             >
               {btn}
             </button>
@@ -32,6 +68,10 @@ function App() {
               <div
                 className={`flex justify-between border w-[280px] p-4 rounded-xl items-center ${
                   index === 0 ? "" : "mt-[20px]"
+                } ${
+                  checkedItems.left[index] === true
+                    ? "border-black"
+                    : "border-gray"
                 }`}
                 key={index}
               >
@@ -48,26 +88,48 @@ function App() {
                     </p>
                   </div>
                 </div>
-                <label className="switch">
-                  <input type="checkbox" checked />
-                  <span className="slider round"></span>
+                <label>
+                  <input
+                    type="checkbox"
+                    checked={checkedItems.left[index] || false}
+                    onChange={() => handleCheckboxChange("left", index)}
+                    className="w-4 h-4"
+                  />
                 </label>
               </div>
             ))}
           </div>
           <div className="">
             <div className="w-[120px] flex relative">
-              <div className="w-[3px] h-[2px] bg-gray-200 mt-[40px]"></div>
-              <div className="w-[60px] h-[50px] mt-10 border-t-2 border-r-2 border-gray rounded-se-3xl absolute top-0 left-[3px]"></div>
-              <div className="w-[60px] h-[50px] "></div>
-              <div className="w-[60px] h-[50px] mt-[90px] border-gray border-b-2 border-l-2 rounded-bl-3xl "></div>
+              <div
+                className={`w-[3px] h-[2px] mt-[40px]  ${getBgClass(0)}`}
+              ></div>
+              <div
+                className={`w-[60px] h-[50px] mt-10 border-t-2 border-r-2 border-gray rounded-se-3xl absolute top-0 left-[3px] ${getLineClassLeft(
+                  0
+                )}`}
+              ></div>
+              <div className="w-[60px] h-[50px]"></div>
+              <div
+                className={`w-[60px] h-[50px] mt-[90px] border-gray border-b-2 border-l-2 rounded-bl-3xl ${getLineClassLeft(
+                  0
+                )}`}
+              ></div>
             </div>
-            <div className="w-[120px] border-2 border-gray"></div>
+            <div className={`w-[120px] border ${getLineClassLeft(1)}`}></div>
             <div className="w-[120px] flex absolute">
-              <div className="w-[60px] h-[50px] border-b-2 border-r-2 relative left-[2px] top-[0px] border-black rounded-br-3xl mt-[50px]"></div>
-              <div className="w-[60px] h-[50px] border-t-2 border-l-2 border-black rounded-tl-3xl"></div>
+              <div
+                className={`w-[60px] h-[50px] border-b-2 border-r-2 relative left-[2px] top-[0px] rounded-br-3xl mt-[50px] ${getLineClassLeft(
+                  2
+                )}`}
+              ></div>
+              <div
+                className={`w-[60px] h-[50px] border-t-2 border-l-2 rounded-tl-3xl ${getLineClassLeft(
+                  2
+                )}`}
+              ></div>
             </div>
-            <div className="w-[2px] h-[2px] bg-black mt-[98px]"></div>
+            <div className={`w-[2px] h-[2px] mt-[98px] ${getBgClass(2)}`}></div>
           </div>
           <div className="w-[380px] border-2 rounded-3xl p-10 relative">
             <img
@@ -88,15 +150,39 @@ function App() {
           </div>
           <div className="w-[120px] ">
             <div className="flex relative">
-              <div className="w-[60px] h-[50px] mt-[90px] border-b-2 border-r-2 border-gray rounded-ee-3xl"></div>
-              <div className="w-[60px] h-[50px] mt-[40px] border-t-2 border-gray border-l-2 rounded-ss-3xl absolute top-0 right-[2px]"></div>
-              <div className="w-[2px] h-[2px] bg-gray-200 ml-[58px] mt-[40px]"></div>
+              <div
+                className={`w-[60px] h-[50px] mt-[90px] border-b-2 border-r-2 rounded-ee-3xl ${getLineClassRight(
+                  0
+                )}`}
+              ></div>
+              <div
+                className={`w-[60px] h-[50px] mt-[40px] border-t-2 border-l-2 rounded-ss-3xl absolute top-0 right-[2px] ${getLineClassRight(
+                  0
+                )}`}
+              ></div>
+              <div
+                className={`w-[2px] h-[2px] ml-[58px] mt-[40px] ${getBgClassRight(
+                  0
+                )}`}
+              ></div>
             </div>
-            <div className="w-[120px] border-2 bg-gray"></div>
+            <div className={`w-[120px] border ${getLineClassRight(1)}`}></div>
             <div className="flex relative">
-              <div className="w-[60px] h-[50px] border-t-2 border-r-2 rounded-se-3xl border-gray"></div>
-              <div className="w-[60px] h-[50px] mt-[50px] border-b-2 border-l-2 rounded-es-3xl absolute top-0 right-[2px]"></div>
-              <div className="w-[2px] h-[2px] bg-gray-200 ml-[58px] mt-[98px]"></div>
+              <div
+                className={`w-[60px] h-[50px] border-t-2 border-r-2 rounded-se-3xl ${getLineClassRight(
+                  2
+                )}`}
+              ></div>
+              <div
+                className={`w-[60px] h-[50px] mt-[50px] border-b-2 border-l-2 rounded-es-3xl absolute top-0 right-[2px] ${getLineClassRight(
+                  2
+                )}`}
+              ></div>
+              <div
+                className={`w-[2px] h-[2px] ml-[58px] mt-[98px] ${getBgClassRight(
+                  2
+                )}`}
+              ></div>
             </div>
           </div>
 
@@ -105,6 +191,10 @@ function App() {
               <div
                 className={`flex justify-between border w-[280px] p-4 rounded-xl items-center ${
                   index === 0 ? "" : "mt-[20px]"
+                } ${
+                  checkedItems.right[index] === true
+                    ? "border-black"
+                    : "border-gray"
                 }`}
                 key={index}
               >
@@ -121,9 +211,13 @@ function App() {
                     </p>
                   </div>
                 </div>
-                <label className="switch">
-                  <input type="checkbox" checked />
-                  <span className="slider round"></span>
+                <label>
+                  <input
+                    type="checkbox"
+                    checked={checkedItems.right[index] || false}
+                    onChange={() => handleCheckboxChange("right", index)}
+                    className="w-4 h-4"
+                  />
                 </label>
               </div>
             ))}
