@@ -1,5 +1,6 @@
 import { useState } from "react";
 import data from "./data.json";
+
 function App() {
   const [checkedItems, setCheckedItems] = useState({
     left: {},
@@ -16,24 +17,24 @@ function App() {
   };
 
   const getLineClassLeft = (index) => {
-    return checkedItems.left[index] ? "border-black" : "border-gray";
+    return checkedItems.left[index] ? "border-purpleDark" : "border-gray";
   };
 
   const getBgClass = (index) => {
-    return checkedItems.left[index] ? "bg-black" : "bg-gray-200";
+    return checkedItems.left[index] ? "bg-purpleDark" : "bg-gray-200";
   };
 
   const getLineClassRight = (index) => {
-    return checkedItems.right[index] ? "border-black" : "border-gray";
+    return checkedItems.right[index] ? "border-purpleDark" : "border-gray";
   };
 
   const getBgClassRight = (index) => {
-    return checkedItems.right[index] ? "bg-black" : "bg-gray-200";
+    return checkedItems.right[index] ? "bg-purpleDark" : "bg-gray-200";
   };
 
   const buttonsText = ["Small Business", "Medium Business", "Enterprise"];
-
-  const [selectedButton, setSelectedButton] = useState(null);
+  const defaultButtonIndex = buttonsText.indexOf("Small Business");
+  const [selectedButton, setSelectedButton] = useState(defaultButtonIndex);
 
   return (
     <>
@@ -50,12 +51,15 @@ function App() {
           {buttonsText.map((btn, index) => (
             <button
               key={index}
-              className={`px-[18px] h-[38px] font-bold text-xs flex items-center border-2 focus:outline-none ml-2 box-border flex-shrink-0
-      ${
-        selectedButton === index
-          ? "bg-purpleDark hover:bg-blue-500 text-white"
-          : "bg-white hover:text-blue-500 text-black border-purpleDark hover:border-blue-500 border-transparent"
-      }`}
+              className={`
+            px-[18px] h-[38px] font-bold text-xs flex items-center focus:outline-none ml-2 box-border flex-shrink-0
+            border-b-2 border-x-0 border-t-0 lg:border-2 lg:border-b-2
+            ${
+              selectedButton === index
+                ? "lg:bg-purpleDark lg:text-white text-purpleDark bg-white lg:hover:bg-blue-500 lg:border-purpleDark border-purpleDark rounded-none lg:rounded-lg"
+                : "text-black hover:text-blue-500 lg:border-purpleDark lg:hover:border-blue-500 border-transparent hover:border-blue-500 rounded-none lg:rounded-lg"
+            }
+          `}
               onClick={() => setSelectedButton(index)}
             >
               {btn}
@@ -70,7 +74,7 @@ function App() {
                   index === 0 ? "" : "mt-[20px]"
                 } ${
                   checkedItems.left[index] === true
-                    ? "border-black"
+                    ? "border-purpleDark"
                     : "border-gray"
                 }`}
                 key={index}
@@ -88,13 +92,22 @@ function App() {
                     </p>
                   </div>
                 </div>
-                <label>
+                <label class="inline-flex items-center cursor-pointer">
                   <input
                     type="checkbox"
+                    value=""
+                    class="sr-only peer"
                     checked={checkedItems.left[index] || false}
                     onChange={() => handleCheckboxChange("left", index)}
-                    className="w-4 h-4"
                   />
+                  <div
+                    class="relative w-[22px] h-[14px] bg-gray-200 rounded-full peer 
+              peer-checked:after:translate-x-[8px] rtl:peer-checked:after:-translate-x-[8px]
+              after:content-[''] after:absolute after:top-[2px] after:start-[2px] 
+              after:bg-white after:border-gray-300 after:border after:rounded-full 
+              after:h-[10px] after:w-[10px] after:transition-all peer-checked:bg-blue-600
+              focus:outline-none"
+                  ></div>
                 </label>
               </div>
             ))}
@@ -132,7 +145,7 @@ function App() {
             <div className={`w-[2px] h-[2px] mt-[98px] ${getBgClass(2)}`}></div>
           </div>
           <div className="lg:flex  block">
-            <div className="lg:w-[380px] w-full border-2 rounded-3xl p-10 relative bg-lightGray">
+            <div className=" w-full border-2 rounded-3xl p-10 relative bg-lightGray">
               <div className="absolute -top-[34px] left-1/2 transform -translate-x-1/2">
                 <img
                   className="w-[86px] h-[86px] rounded-[10px]"
@@ -196,7 +209,7 @@ function App() {
                     index === 0 ? "" : "mt-[20px]"
                   } ${
                     checkedItems.right[index] === true
-                      ? "border-black"
+                      ? "border-purpleDark"
                       : "border-gray"
                   }`}
                   key={index}
@@ -216,13 +229,22 @@ function App() {
                       </p>
                     </div>
                   </div>
-                  <label>
+                  <label class="inline-flex items-center cursor-pointer">
                     <input
                       type="checkbox"
+                      value=""
+                      class="sr-only peer"
                       checked={checkedItems.right[index] || false}
                       onChange={() => handleCheckboxChange("right", index)}
-                      className="w-4 h-4"
                     />
+                    <div
+                      class="relative w-[22px] h-[14px] bg-gray-200 rounded-full peer 
+              peer-checked:after:translate-x-[8px] rtl:peer-checked:after:-translate-x-[8px]
+              after:content-[''] after:absolute after:top-[2px] after:start-[2px] 
+              after:bg-white after:border-gray-300 after:border after:rounded-full 
+              after:h-[10px] after:w-[10px] after:transition-all peer-checked:bg-blue-600
+              focus:outline-none"
+                    ></div>
                   </label>
                 </div>
               ))}
