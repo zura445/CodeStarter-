@@ -1,12 +1,32 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import data from "./data.json";
 
-function App() {
-  const [checkedItems, setCheckedItems] = useState({
+interface BoxData {
+  imgSrc: string;
+  imgAlt: string;
+  title: string;
+  description: string;
+}
+
+interface AppData {
+  boxesDataLeft: BoxData[];
+  boxesDataRight: BoxData[];
+}
+
+interface CheckedItems {
+  left: { [key: number]: boolean };
+  right: { [key: number]: boolean };
+}
+
+const appData: AppData = data;
+
+const App: React.FC = () => {
+  const [checkedItems, setCheckedItems] = useState<CheckedItems>({
     left: {},
     right: {},
   });
-  const handleCheckboxChange = (side, index) => {
+
+  const handleCheckboxChange = (side: "left" | "right", index: number) => {
     setCheckedItems((prevState) => ({
       ...prevState,
       [side]: {
@@ -16,19 +36,19 @@ function App() {
     }));
   };
 
-  const getLineClassLeft = (index) => {
+  const getLineClassLeft = (index: number): string => {
     return checkedItems.left[index] ? "border-purpleDark" : "border-gray";
   };
 
-  const getBgClass = (index) => {
+  const getBgClass = (index: number): string => {
     return checkedItems.left[index] ? "bg-purpleDark" : "bg-gray-200";
   };
 
-  const getLineClassRight = (index) => {
+  const getLineClassRight = (index: number): string => {
     return checkedItems.right[index] ? "border-purpleDark" : "border-gray";
   };
 
-  const getBgClassRight = (index) => {
+  const getBgClassRight = (index: number): string => {
     return checkedItems.right[index] ? "bg-purpleDark" : "bg-gray-200";
   };
 
@@ -52,23 +72,23 @@ function App() {
             <button
               key={index}
               className={`
-            px-[18px] h-[38px] font-bold text-xs flex items-center focus:outline-none ml-2 box-border flex-shrink-0
-            border-b-2 border-x-0 border-t-0 lg:border-2 lg:border-b-2
-            ${
-              selectedButton === index
-                ? "lg:bg-purpleDark lg:text-white text-purpleDark bg-white lg:hover:bg-blue-500 lg:border-purpleDark border-purpleDark rounded-none lg:rounded-lg"
-                : "text-black hover:text-blue-500 lg:border-purpleDark lg:hover:border-blue-500 border-transparent hover:border-blue-500 rounded-none lg:rounded-lg"
-            }
-          `}
+                px-[18px] h-[38px] font-bold text-xs flex items-center focus:outline-none ml-2 box-border flex-shrink-0
+                border-b-2 border-x-0 border-t-0 lg:border-2 lg:border-b-2
+                ${
+                  selectedButton === index
+                    ? "lg:bg-purpleDark lg:text-white text-purpleDark bg-white lg:hover:bg-blue-500 lg:border-purpleDark border-purpleDark rounded-none lg:rounded-lg"
+                    : "text-darkInk hover:text-blue-500 lg:border-purpleDark lg:hover:border-blue-500 border-transparent hover:border-blue-500 rounded-none lg:rounded-lg"
+                }
+              `}
               onClick={() => setSelectedButton(index)}
             >
               {btn}
             </button>
           ))}
         </div>
-        <div className="mt-[69px] flex justify-center ">
+        <div className="mt-[69px] flex justify-center">
           <div className="lg:block hidden">
-            {data.boxesDataLeft.map((info, index) => (
+            {appData.boxesDataLeft.map((info, index) => (
               <div
                 className={`flex justify-between border w-[280px] p-4 rounded-xl items-center ${
                   index === 0 ? "" : "mt-[20px]"
@@ -86,27 +106,28 @@ function App() {
                     alt={info.imgAlt}
                   />
                   <div className="ml-2">
-                    <p className="text-sm text-ink  leading-6">{info.title}</p>
+                    <p className="text-sm text-ink leading-6">{info.title}</p>
                     <p className="text-sm text-ink text-center leading-6">
                       {info.description}
                     </p>
                   </div>
                 </div>
-                <label class="inline-flex items-center cursor-pointer">
+                <label className="inline-flex items-center cursor-pointer">
                   <input
                     type="checkbox"
                     value=""
-                    class="sr-only peer"
+                    className="sr-only peer"
                     checked={checkedItems.left[index] || false}
                     onChange={() => handleCheckboxChange("left", index)}
+                    aria-label={`Toggle checkbox for ${info.title}`}
                   />
                   <div
-                    class="relative w-[22px] h-[14px] bg-gray-200 rounded-full peer 
-              peer-checked:after:translate-x-[8px] rtl:peer-checked:after:-translate-x-[8px]
-              after:content-[''] after:absolute after:top-[2px] after:start-[2px] 
-              after:bg-white after:border-gray-300 after:border after:rounded-full 
-              after:h-[10px] after:w-[10px] after:transition-all peer-checked:bg-blue-600
-              focus:outline-none"
+                    className="relative w-[22px] h-[14px] bg-gray-200 rounded-full peer 
+                      peer-checked:after:translate-x-[8px] rtl:peer-checked:after:-translate-x-[8px]
+                      after:content-[''] after:absolute after:top-[2px] after:start-[2px] 
+                      after:bg-white after:border-gray-300 after:border after:rounded-full 
+                      after:h-[10px] after:w-[10px] after:transition-all peer-checked:bg-blue-600
+                      focus:outline-none"
                   ></div>
                 </label>
               </div>
@@ -115,7 +136,7 @@ function App() {
           <div className="lg:block hidden">
             <div className="w-[120px] flex relative">
               <div
-                className={`w-[3px] h-[2px] mt-[40px]  ${getBgClass(0)}`}
+                className={`w-[3px] h-[2px] mt-[40px] ${getBgClass(0)}`}
               ></div>
               <div
                 className={`w-[60px] h-[50px] mt-10 border-t-2 border-r-2 border-gray rounded-se-3xl absolute top-0 left-[3px] ${getLineClassLeft(
@@ -144,8 +165,8 @@ function App() {
             </div>
             <div className={`w-[2px] h-[2px] mt-[98px] ${getBgClass(2)}`}></div>
           </div>
-          <div className="lg:flex  block">
-            <div className=" w-full border-2 rounded-3xl p-10 relative bg-lightGray">
+          <div className="lg:flex block">
+            <div className="w-full border-2 rounded-3xl p-10 relative bg-lightGray">
               <div className="absolute -top-[34px] left-1/2 transform -translate-x-1/2">
                 <img
                   className="w-[86px] h-[86px] rounded-[10px]"
@@ -203,7 +224,7 @@ function App() {
             </div>
 
             <div className="mt-10 lg:mt-0">
-              {data.boxesDataRight.map((info, index) => (
+              {appData.boxesDataRight.map((info, index) => (
                 <div
                   className={`flex justify-between border lg:w-[280px] w-full p-4 rounded-xl items-center ${
                     index === 0 ? "" : "mt-[20px]"
@@ -221,29 +242,28 @@ function App() {
                       alt={info.imgAlt}
                     />
                     <div className="ml-2">
-                      <p className="text-sm text-ink  leading-6">
-                        {info.title}
-                      </p>
+                      <p className="text-sm text-ink leading-6">{info.title}</p>
                       <p className="text-sm text-ink text-center leading-6">
                         {info.description}
                       </p>
                     </div>
                   </div>
-                  <label class="inline-flex items-center cursor-pointer">
+                  <label className="inline-flex items-center cursor-pointer">
                     <input
                       type="checkbox"
                       value=""
-                      class="sr-only peer"
+                      className="sr-only peer"
                       checked={checkedItems.right[index] || false}
                       onChange={() => handleCheckboxChange("right", index)}
+                      aria-label={`Toggle checkbox for ${info.title}`}
                     />
                     <div
-                      class="relative w-[22px] h-[14px] bg-gray-200 rounded-full peer 
-              peer-checked:after:translate-x-[8px] rtl:peer-checked:after:-translate-x-[8px]
-              after:content-[''] after:absolute after:top-[2px] after:start-[2px] 
-              after:bg-white after:border-gray-300 after:border after:rounded-full 
-              after:h-[10px] after:w-[10px] after:transition-all peer-checked:bg-blue-600
-              focus:outline-none"
+                      className="relative w-[22px] h-[14px] bg-gray-200 rounded-full peer 
+                        peer-checked:after:translate-x-[8px] rtl:peer-checked:after:-translate-x-[8px]
+                        after:content-[''] after:absolute after:top-[2px] after:start-[2px] 
+                        after:bg-white after:border-gray-300 after:border after:rounded-full 
+                        after:h-[10px] after:w-[10px] after:transition-all peer-checked:bg-blue-600
+                        focus:outline-none"
                     ></div>
                   </label>
                 </div>
@@ -254,6 +274,6 @@ function App() {
       </div>
     </>
   );
-}
+};
 
 export default App;
