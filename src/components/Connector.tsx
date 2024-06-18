@@ -1,9 +1,25 @@
 import React from "react";
 
-export default function Connector() {
+interface ConnectorProps {
+  leftToggles: boolean[];
+  rightToggles: boolean[];
+}
+
+export default function Connector({
+  leftToggles,
+  rightToggles,
+}: ConnectorProps) {
+  const isBorderRed = [...leftToggles, ...rightToggles].some(
+    (toggle) => toggle
+  );
+
   return (
     <div>
-      <div className="w-full border-2 rounded-3xl p-10 relative bg-lightGray">
+      <div
+        className={`w-full border-2 rounded-3xl p-10 relative bg-lightGray ${
+          isBorderRed ? "border-purpleDark" : ""
+        }`}
+      >
         <div className="absolute -top-[34px] left-1/2 transform -translate-x-1/2">
           <img
             className="w-[86px] h-[86px] rounded-[10px]"

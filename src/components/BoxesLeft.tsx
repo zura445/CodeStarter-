@@ -1,6 +1,6 @@
 import React from "react";
 import data from "../data.json";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Box from "./Box";
 
 interface BoxData {
@@ -22,11 +22,20 @@ interface CheckedItems {
 
 const appData: AppData = data;
 
-export default function BoxesLeft() {
+interface BoxesLeftProps {
+  setToggles: React.Dispatch<React.SetStateAction<boolean[]>>;
+}
+
+export default function BoxesLeft({ setToggles }: BoxesLeftProps) {
   const [checkedItems, setCheckedItems] = useState<CheckedItems>({
     left: {},
     right: {},
   });
+
+  useEffect(() => {
+    const newToggles = Object.values(checkedItems.left);
+    setToggles(newToggles);
+  }, [checkedItems.left, setToggles]);
 
   const handleCheckboxChange = (index: number) => {
     setCheckedItems((prevState) => ({

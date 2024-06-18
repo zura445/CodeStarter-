@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import data from "../data.json";
 import Box from "./Box";
 
@@ -22,7 +22,11 @@ interface AppData {
 
 const appData: AppData = data;
 
-export default function BoxesRight() {
+interface BoxesRightProps {
+  setToggles: React.Dispatch<React.SetStateAction<boolean[]>>;
+}
+
+export default function BoxesRight({ setToggles }: BoxesRightProps) {
   const getLineClassRight = (index: number): string => {
     return checkedItems.right[index] ? "border-purpleDark" : "border-gray";
   };
@@ -31,6 +35,11 @@ export default function BoxesRight() {
     left: {},
     right: {},
   });
+
+  useEffect(() => {
+    const newToggles = Object.values(checkedItems.right);
+    setToggles(newToggles);
+  }, [checkedItems.right, setToggles]);
 
   const getBgClassRight = (index: number): string => {
     return checkedItems.right[index] ? "bg-purpleDark" : "bg-gray-200";
