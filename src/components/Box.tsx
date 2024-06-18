@@ -17,7 +17,7 @@ interface BoxProps {
 export default function Box({ info, index, checked, onChange }: BoxProps) {
   return (
     <div
-      className={`flex justify-between border w-[280px] p-4 rounded-xl items-center ${
+      className={`flex justify-between border lg:w-[280px] p-4 rounded-xl items-center ${
         index === 0 ? "" : "mt-[20px]"
       } ${checked ? "border-purpleDark" : "border-gray"}`}
     >
