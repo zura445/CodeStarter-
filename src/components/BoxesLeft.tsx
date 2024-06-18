@@ -1,6 +1,7 @@
 import React from "react";
 import data from "../data.json";
 import { useState } from "react";
+import Box from "./Box";
 
 interface BoxData {
   imgSrc: string;
@@ -27,12 +28,12 @@ export default function BoxesLeft() {
     right: {},
   });
 
-  const handleCheckboxChange = (side: "left" | "right", index: number) => {
+  const handleCheckboxChange = (index: number) => {
     setCheckedItems((prevState) => ({
       ...prevState,
-      [side]: {
-        ...prevState[side],
-        [index]: !prevState[side][index],
+      left: {
+        ...prevState.left,
+        [index]: !prevState.left[index],
       },
     }));
   };
@@ -49,44 +50,13 @@ export default function BoxesLeft() {
     <div className="flex">
       <div className="lg:block hidden">
         {appData.boxesDataLeft.map((info, index) => (
-          <div
-            className={`flex justify-between border w-[280px] p-4 rounded-xl items-center ${
-              index === 0 ? "" : "mt-[20px]"
-            } ${
-              checkedItems.left[index] === true
-                ? "border-purpleDark"
-                : "border-gray"
-            }`}
+          <Box
             key={index}
-          >
-            <div className="flex">
-              <img className="w-12 h-12" src={info.imgSrc} alt={info.imgAlt} />
-              <div className="ml-2">
-                <p className="text-sm text-ink leading-6">{info.title}</p>
-                <p className="text-sm text-ink text-center leading-6">
-                  {info.description}
-                </p>
-              </div>
-            </div>
-            <label className="inline-flex items-center cursor-pointer">
-              <input
-                type="checkbox"
-                value=""
-                className="sr-only peer"
-                checked={checkedItems.left[index] || false}
-                onChange={() => handleCheckboxChange("left", index)}
-                aria-label={`Toggle checkbox for ${info.title}`}
-              />
-              <div
-                className="relative w-[22px] h-[14px] bg-gray-200 rounded-full peer 
-            peer-checked:after:translate-x-[8px] rtl:peer-checked:after:-translate-x-[8px]
-            after:content-[''] after:absolute after:top-[2px] after:start-[2px] 
-            after:bg-white after:border-gray-300 after:border after:rounded-full 
-            after:h-[10px] after:w-[10px] after:transition-all peer-checked:bg-blue-600
-            focus:outline-none"
-              ></div>
-            </label>
-          </div>
+            info={info}
+            index={index}
+            checked={checkedItems.left[index] || false}
+            onChange={handleCheckboxChange}
+          />
         ))}
       </div>
       <div className="lg:block hidden">
