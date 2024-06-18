@@ -2,7 +2,7 @@
   "boxesDataLeft": [
     {
       "id": 1,
-      "imgSrc": "/images/sapling.svg",
+      "imgSrc": "/images/sapling.jpg",
       "imgAlt": "seppling-logo",
       "title": "Sapling",
       "description": "HR Management",
@@ -11,7 +11,7 @@
     },
     {
       "id": 2,
-      "imgSrc": "/images/workday.svg",
+      "imgSrc": "/images/workday.jpg",
       "imgAlt": "seppling-logo",
       "title": "Workday",
       "description": "HR Management",
@@ -19,7 +19,7 @@
     },
     {
       "id": 3,
-      "imgSrc": "/images/xero.svg",
+      "imgSrc": "/images/xero.jpg",
       "imgAlt": "seppling-logo",
       "title": "Xero",
       "description": "Employers Base",
@@ -30,7 +30,7 @@
   "boxesDataRight": [
     {
       "id": 1,
-      "imgSrc": "/images/rippling.svg",
+      "imgSrc": "/images/rippling.jpg",
       "imgAlt": "seppling-logo",
       "title": "Rippling",
       "description": "Salary Management",
@@ -38,7 +38,7 @@
     },
     {
       "id": 2,
-      "imgSrc": "/images/expensify.svg",
+      "imgSrc": "/images/expensify.jpg",
       "imgAlt": "seppling-logo",
       "title": "Expensify",
       "description": "HR Management",
@@ -46,7 +46,7 @@
     },
     {
       "id": 3,
-      "imgSrc": "/images/zenefits.svg",
+      "imgSrc": "/images/zenefits.jpg",
       "imgAlt": "seppling-logo",
       "title": "Zenefits",
       "description": "Employers Base",
